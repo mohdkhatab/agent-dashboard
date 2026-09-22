@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: agent-dashboard
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: CHROMIUM_PATH
+        value: /usr/bin/chromium
+      - key: RENDER
+        value: "true"

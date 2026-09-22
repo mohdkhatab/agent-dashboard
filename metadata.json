@@ -1,0 +1,6 @@
+{
+  "name": "Agent Dashboard",
+  "description": "Live 4-screen agent dashboard with per-tab proxy, auto-scroll, and auto banner-click automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>DemoSite — Chats</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+.chat { display: flex; gap: 10px; margin-top: 14px; }
+.chat .ava { width: 38px; height: 38px; border-radius: 50%; background: #c7d5f5; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #1d4ed8; }
+.chat .msg { background: #eef2fb; padding: 10px 14px; border-radius: 12px; font-size: 13px; max-width: 75%; }
+.chat.mine { flex-direction: row-reverse; }
+.chat.mine .msg { background: #dbeafe; }
+</style>
+</head>
+<body>
+<header class="sitebar">
+  <span class="slogo">💬</span>
+  <h1>DemoSite — Chats</h1>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="chats.html" class="active">Chats</a>
+    <a href="ads.html">Ads</a>
+    <a href="news.html">News</a>
+  </nav>
+</header>
+<div class="statusbar">PAGE 2 · CHATS — live agent #2</div>
+<div class="wrap">
+  <div class="sec">
+    <h2>Chat Window 💬</h2>
+    <div class="chat"><div class="ava">A</div><div class="msg">Hello! Agent dashboard kaise chal raha hai?</div></div>
+    <div class="chat mine"><div class="ava">U</div><div class="msg">Bahut badhiya — 4 screens live chal rahi hain 🔥</div></div>
+    <div class="chat"><div class="ava">B</div><div class="msg">Scrolling bhi automatic ho rahi hai!</div></div>
+    <div class="chat mine"><div class="ava">U</div><div class="msg">Haan aur banners bhi auto-click ho rahe hain. 👇</div></div>
+  </div>
+
+  <div class="banner">
+    <a href="home.html">
+      <span class="tag">SPONSORED CHAT</span>
+      <div class="bt">ChatGPT Pro — 1 Mahine FREE ✨</div>
+      <div class="bs">Promoted message · Tap to view</div>
+    </a>
+  </div>
+
+  <div class="sec"><h2>Group: Dev Team</h2><p>Yeh chat demo content hai jo page ko baRha bna raha hai taaki scroll dikhe. Bohut saara text chahiye yahan — turpis mattis, nam vitae velit erat, duis sed elit quis.</p></div>
+  <div class="chat"><div class="ava">C</div><div class="msg">Bhai proxy bhi alag-alag lagao, har tab ka apna country IP dikhega 🌍</div></div>
+  <div class="chat mine"><div class="ava">U</div><div class="msg">Exactly — config.json me proxy set karo aur test-proxies chalao!</div></div>
+
+  <div class="banner ad-alt">
+    <a href="news.html">
+      <span class="tag">AD</span>
+      <div class="bt">Online Earning — Real Proof 🤑</div>
+      <div class="bs">1000+ users joined · Click to see</div>
+    </a>
+  </div>
+
+  <div class="sec"><h2>Best Deals</h2><p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p></div>
+  <div class="chat"><div class="ava">D</div><div class="msg">Footer tak scroll kiya? ✅</div></div>
+  <div class="sec"><h2>End of Chat Log</h2><p>Isse zyada koi message nahi 😄</p></div>
+</div>
+</body>
+</html>

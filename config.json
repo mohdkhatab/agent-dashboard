@@ -1,0 +1,272 @@
+{
+  "server": {
+    "port": 3000
+  },
+  "screenshotIntervalMs": 2500,
+  "chromiumPath": "/usr/bin/chromium",
+  "agents": [
+    {
+      "id": "home",
+      "name": "Home",
+      "url": "https://webtozip.ai.studio",
+      "reloadIntervalMs": 15000,
+      "proxies": [
+        {
+          "url": "socks5://127.0.0.1:19062",
+          "label": "\ud83c\uddf9\ud83c\uddfc Taiwan (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19055",
+          "label": "\ud83c\uddef\ud83c\uddf5 Japan (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19059",
+          "label": "\ud83c\udded\ud83c\uddf0 Hong Kong (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19053",
+          "label": "\ud83c\uddec\ud83c\udde7 UK (Tor)"
+        },
+        {
+          "url": "http://136.226.118.194:9480",
+          "label": "\ud83c\uddfa\ud83c\uddf8 US (free)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19061",
+          "label": "\ud83c\uddf0\ud83c\uddf7 Korea (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19051",
+          "label": "\ud83c\udde9\ud83c\uddea Germany (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19057",
+          "label": "\ud83c\uddf1\ud83c\uddfa Luxembourg (Tor)"
+        }
+      ],
+      "postLoad": [
+        {
+          "type": "wait",
+          "ms": 2500
+        }
+      ],
+      "autoScroll": true,
+      "autoClick": true,
+      "clickProbability": 0.9,
+      "clickFrequencyMs": 2000,
+      "clickAnyButton": true,
+      "clickSelectors": [
+        "[id^='container-'] a[href]",
+        "[class*='ad'] a[href]",
+        "[class*='banner'] a[href]",
+        "ins a[href]",
+        "[class*='ad'] [onclick]",
+        "[id^='container-']",
+        "a[target='_blank']"
+      ],
+      "skipSelectors": [
+        ".zip",
+        ".pdf",
+        ".exe",
+        ".apk",
+        ".rar",
+        "download",
+        "webtozip.zip"
+      ],
+      "viewport": {
+        "width": 900,
+        "height": 640
+      }
+    },
+    {
+      "id": "chats",
+      "name": "Chats",
+      "url": "https://webtozip.ai.studio",
+      "reloadIntervalMs": 15000,
+      "proxies": [
+        {
+          "url": "socks5://127.0.0.1:19055",
+          "label": "\ud83c\uddef\ud83c\uddf5 Japan (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19061",
+          "label": "\ud83c\uddf0\ud83c\uddf7 Korea (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19062",
+          "label": "\ud83c\uddf9\ud83c\uddfc Taiwan (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19053",
+          "label": "\ud83c\uddec\ud83c\udde7 UK (Tor)"
+        },
+        {
+          "url": "http://136.226.118.196:9480",
+          "label": "\ud83c\uddfa\ud83c\uddf8 US (free)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19059",
+          "label": "\ud83c\udded\ud83c\uddf0 Hong Kong (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19058",
+          "label": "\ud83c\udde6\ud83c\uddfa Australia (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19050",
+          "label": "\ud83c\uddfa\ud83c\uddf8 US (Tor)"
+        }
+      ],
+      "postLoad": [
+        {
+          "type": "clickText",
+          "text": "Hacker News",
+          "afterMs": 3000
+        }
+      ],
+      "autoScroll": true,
+      "autoClick": true,
+      "clickProbability": 0.9,
+      "clickFrequencyMs": 2000,
+      "clickAnyButton": true,
+      "clickSelectors": [
+        "[id^='container-'] a[href]",
+        "[class*='ad'] a[href]",
+        "[class*='banner'] a[href]",
+        "ins a[href]",
+        "[class*='ad'] [onclick]",
+        "[id^='container-']",
+        "a[target='_blank']"
+      ],
+      "skipSelectors": [
+        ".zip",
+        ".pdf",
+        ".exe",
+        ".apk",
+        ".rar",
+        "download",
+        "webtozip.zip"
+      ],
+      "viewport": {
+        "width": 900,
+        "height": 640
+      }
+    },
+    {
+      "id": "ads",
+      "name": "Ads",
+      "url": "https://webtozip.ai.studio",
+      "reloadIntervalMs": 15000,
+      "proxies": [
+        {
+          "url": "socks5://127.0.0.1:19059",
+          "label": "\ud83c\udded\ud83c\uddf0 Hong Kong (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19062",
+          "label": "\ud83c\uddf9\ud83c\uddfc Taiwan (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19055",
+          "label": "\ud83c\uddef\ud83c\uddf5 Japan (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19061",
+          "label": "\ud83c\uddf0\ud83c\uddf7 Korea (Tor)"
+        },
+        {
+          "url": "http://136.226.118.194:9480",
+          "label": "\ud83c\uddfa\ud83c\uddf8 US (free)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19053",
+          "label": "\ud83c\uddec\ud83c\udde7 UK (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19051",
+          "label": "\ud83c\udde9\ud83c\uddea Germany (Tor)"
+        },
+        {
+          "url": "socks5://127.0.0.1:19050",
+          "label": "\ud83c\uddfa\ud83c\uddf8 US (Tor)"
+        }
+      ],
+      "postLoad": [
+        {
+          "type": "clickText",
+          "text": "Wikipedia",
+          "afterMs": 3000
+        }
+      ],
+      "autoScroll": true,
+      "autoClick": true,
+      "clickProbability": 0.9,
+      "clickFrequencyMs": 2000,
+      "clickAnyButton": true,
+      "clickSelectors": [
+        "[id^='container-'] a[href]",
+        "[class*='ad'] a[href]",
+        "[class*='banner'] a[href]",
+        "ins a[href]",
+        "[class*='ad'] [onclick]",
+        "[id^='container-']",
+        "a[target='_blank']"
+      ],
+      "skipSelectors": [
+        ".zip",
+        ".pdf",
+        ".exe",
+        ".apk",
+        ".rar",
+        "download",
+        "webtozip.zip"
+      ],
+      "viewport": {
+        "width": 900,
+        "height": 640
+      }
+    },
+    {
+      "id": "news",
+      "name": "News",
+      "url": "https://webtozip.ai.studio",
+      "reloadIntervalMs": 15000,
+      "proxies": [],
+      "postLoad": [
+        {
+          "type": "clickText",
+          "text": "Tailwind CSS",
+          "afterMs": 3000
+        }
+      ],
+      "autoScroll": true,
+      "autoClick": true,
+      "clickProbability": 0.9,
+      "clickFrequencyMs": 2000,
+      "clickAnyButton": true,
+      "clickSelectors": [
+        "[id^='container-'] a[href]",
+        "[class*='ad'] a[href]",
+        "[class*='banner'] a[href]",
+        "ins a[href]",
+        "[class*='ad'] [onclick]",
+        "[id^='container-']",
+        "a[target='_blank']"
+      ],
+      "skipSelectors": [
+        ".zip",
+        ".pdf",
+        ".exe",
+        ".apk",
+        ".rar",
+        "download",
+        "webtozip.zip"
+      ],
+      "viewport": {
+        "width": 900,
+        "height": 640
+      },
+      "proxyLabel": "\ud83c\uddfb\ud83c\uddf3 Vietnam (residential)"
+    }
+  ]
+}

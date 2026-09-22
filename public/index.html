@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Dashboard — 4 Live Screens</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🕹️</span>
+      <h1>Agent Dashboard</h1>
+      <span class="badge">4 Live Screens · Single Page</span>
+    </div>
+    <div class="global-stats" id="globalStats">
+      <span class="chip conn off" id="connChip">● Connecting...</span>
+    </div>
+  </header>
+
+  <main class="grid" id="grid">
+    <!-- 4 panels render via app.js -->
+  </main>
+
+  <footer class="footer">
+    <p>Live screenshots har ~2.5s update hote hain · Har panel apna proxy IP use karta hai · Auto-scroll + auto banner-click on by default</p>
+    <p class="hint">Proxy edit: <code>config.json</code> → <code>agents[].proxy</code> (e.g. <code>http://user:pass@1.2.3.4:8080</code>) aur <code>node scripts/test-proxies.js</code> chalao.</p>
+  </footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
