@@ -16,7 +16,71 @@ const { chromium } = require('playwright-core');
 
 const CONFIG_PATH = path.join(__dirname, 'config.json');
 const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-const CHROMIUM_PATH = process.env.CHROMIUM_PATH || config.chromiumPath || '/usr/bin/chromium';
+
+// Configure persistent playwright browser cache path
+const PLAYWRIGHT_CACHE_DIR = path.join(__dirname, '.cache', 'ms-playwright');
+process.env.PLAYWRIGHT_BROWSERS_PATH = PLAYWRIGHT_CACHE_DIR;
+
+function findChromiumExecutable() {
+  const custom = process.env.CHROMIUM_PATH || config.chromiumPath;
+  if (custom && fs.existsSync(custom)) return custom;
+
+  // Check persistent Playwright cache
+  if (fs.existsSync(PLAYWRIGHT_CACHE_DIR)) {
+    try {
+      const dirs = fs.readdirSync(PLAYWRIGHT_CACHE_DIR);
+      for (const d of dirs) {
+        const candidates = [
+          path.join(PLAYWRIGHT_CACHE_DIR, d, 'chrome-linux64', 'chrome'),
+          path.join(PLAYWRIGHT_CACHE_DIR, d, 'chrome-linux', 'chrome'),
+          path.join(PLAYWRIGHT_CACHE_DIR, d, 'chrome-headless-shell-linux64', 'chrome-headless-shell'),
+        ];
+        for (const c of candidates) {
+          if (fs.existsSync(c)) return c;
+        }
+      }
+    } catch {}
+  }
+
+  // Check standard system binary paths
+  const systemCandidates = [
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/google-chrome',
+    '/usr/bin/google-chrome-stable',
+    '/snap/bin/chromium',
+  ];
+  for (const p of systemCandidates) {
+    if (fs.existsSync(p)) return p;
+  }
+
+  try {
+    const pwPath = chromium.executablePath();
+    if (pwPath && fs.existsSync(pwPath)) return pwPath;
+  } catch {}
+
+  return null;
+}
+
+function ensureChromium() {
+  let p = findChromiumExecutable();
+  if (p) return p;
+
+  console.log('⚠️ Chromium not found. Auto-installing Playwright Chromium...');
+  try {
+    fs.mkdirSync(PLAYWRIGHT_CACHE_DIR, { recursive: true });
+    require('child_process').execSync('npx playwright-core install chromium', {
+      env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: PLAYWRIGHT_CACHE_DIR },
+      stdio: 'inherit',
+      timeout: 120000,
+    });
+    p = findChromiumExecutable();
+    if (p) return p;
+  } catch (err) {
+    console.error('Failed to auto-install Playwright chromium:', err.message);
+  }
+  return null;
+}
 
 /* ---------------- HTTP + Socket setup ---------------- */
 const app = express();
@@ -476,22 +540,6 @@ io.on('connection', (socket) => {
 let BROWSER_REF = null;
 
 async function main() {
-  const browser = await chromium.launch({
-    executablePath: CHROMIUM_PATH,
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--disable-extensions',
-      '--disable-background-timer-throttling',
-      '--disable-blink-features=AutomationControlled', // ad networks ko headless na dikhe
-    ],
-  });
-  BROWSER_REF = browser;
-
-  for (const ac of config.agents) startAgent(browser, ac);
-
   // In Render, PORT is provided (typically 10000); in AI Studio local sandbox, default to 3000
   const port = process.env.RENDER
     ? (process.env.PORT || 10000)
@@ -499,13 +547,38 @@ async function main() {
 
   server.listen(port, '0.0.0.0', () => {
     console.log(`\n  ✅ Agent Dashboard: http://0.0.0.0:${port}`);
-    console.log(`  💻 Chromium: ${CHROMIUM_PATH}\n`);
   });
+
+  const execPath = ensureChromium();
+  if (!execPath) {
+    console.warn('⚠️ Chromium executable could not be resolved. Web server is running, waiting for browser.');
+    return;
+  }
+  console.log(`  💻 Chromium: ${execPath}\n`);
+
+  try {
+    const browser = await chromium.launch({
+      executablePath: execPath,
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--disable-extensions',
+        '--disable-background-timer-throttling',
+        '--disable-blink-features=AutomationControlled',
+      ],
+    });
+    BROWSER_REF = browser;
+
+    for (const ac of config.agents) startAgent(browser, ac);
+  } catch (err) {
+    console.error('⚠️ Warning: Failed to launch browser:', err.message);
+  }
 }
 
 main().catch((e) => {
-  console.error('FATAL:', e);
-  process.exit(1);
+  console.error('Server error:', e);
 });
 
 async function shutdown() {
