@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "node -e 'console.log(\"Build ok\")'",
+    "build": "npx playwright-core install chromium || true",
+    "postinstall": "npx playwright-core install chromium || true",
     "lint": "node -e 'console.log(\"Lint ok\")'",
     "test-proxies": "node scripts/test-proxies.js"
   },
